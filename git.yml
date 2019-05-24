@@ -1,0 +1,17 @@
+---
+- name: Playbook for Git Installation
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Install Git 
+    yum:
+      pkg: git
+      state: latest
+    when: ansible_os_family == "RedHat"
+
+  - name: Install Git
+    apt:
+      pkg: git
+      state: latest
+    when: ansible_os_family == "Debian"

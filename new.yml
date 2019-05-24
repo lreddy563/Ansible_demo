@@ -1,0 +1,22 @@
+---
+- hosts: all
+  sudo: yes
+  gather_facts: False
+  tasks:
+  - name: date/time stamp for playbook start
+    raw: /usr/bin/date > /etc/ansible/playbook_start.log
+  
+  - name: install the apache web server
+    yum: pkg=httpd state=latest
+    notify: restart the HTTPD
+  
+  - name: log all the packages installed
+    raw: yum list installed > /etc/ansible/installed.log
+  
+  - name: date/time stamp for playbook end
+    raw: /usr/bin/date > /etc/ansible/playbook_end.log
+
+  handlers:
+    - name: restart the HTTPD
+      action: service name=httpd state=restarted
+

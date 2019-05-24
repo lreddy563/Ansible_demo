@@ -1,5 +1,5 @@
 - hosts: localhost
-  become_user: yes
+  become: yes
   tasks:
   - name: Ansible create file if it doesn't exist example
     file:
